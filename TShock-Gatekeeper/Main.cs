@@ -6,6 +6,7 @@ using TShockAPI;
 
 namespace TShock_Gatekeeper
 {
+    [ApiVersion(2, 1)]
     public class TShock_Gatekeeper : TerrariaPlugin
     {
         public override string Author => "hdseventh";
