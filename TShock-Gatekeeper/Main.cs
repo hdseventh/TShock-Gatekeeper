@@ -19,7 +19,7 @@ namespace TShock_Gatekeeper
         }
 
         public const string configFolder = "Gatekeeper";
-        private static string ConfigPath = Path.Combine(TShock.SavePath, configFolder, "AntiVPNConfig.json");
+        private static string ConfigPath = Path.Combine(TShock.SavePath, configFolder, "GatekeeperConfig.json");
 
         public static GKConfig Config { get; set; } = new GKConfig();
 
