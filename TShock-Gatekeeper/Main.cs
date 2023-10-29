@@ -89,7 +89,7 @@ namespace TShock_Gatekeeper
                         panicMode = true;
                         player.SendSuccessMessage(tag + "Panic Mode has been activated!");
                     }
-                    player.SendSuccessMessage(tag + "Run this command again to deactivate panic mode.");
+                    player.SendSuccessMessage(tag + "Run this command again to toggle panic mode.");
                     return;
 
                 case "kickAll":
