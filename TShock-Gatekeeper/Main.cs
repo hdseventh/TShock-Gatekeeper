@@ -39,7 +39,6 @@ namespace TShock_Gatekeeper
         {
             if (!File.Exists(Path.Combine(TShock.SavePath, configFolder)))
             {
-                Console.WriteLine(tag + " Plugin folder not found, creating a new one...");
                 Directory.CreateDirectory(Path.Combine(TShock.SavePath, configFolder));
             }
 
