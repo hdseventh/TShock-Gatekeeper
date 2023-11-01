@@ -55,7 +55,7 @@ namespace TShock_Gatekeeper
             }
 
             //Commands
-            Commands.ChatCommands.Add(new Command("gatekeeper.admin.main", MainCommand, "gatekeeper", "gk"));
+            Commands.ChatCommands.Add(new Command("gatekeeper.admin.main", MainCommand, "gatekeeper", "gk")); 
         }
 
         private static void MainCommand(CommandArgs args)
@@ -94,11 +94,17 @@ namespace TShock_Gatekeeper
 
                 case "kickAll":
                 case "ka":
-                    foreach (TSPlayer ply in TShock.Players)
+                    if (TShock.Utils.GetActivePlayerCount() < 1)
                     {
-                        if (ply.Name != player.Name)
+                        player.SendErrorMessage(tag + "There's no other players beside you.");
+                        return;
+                    };
+                    for (int i = 0; i < TShock.Utils.GetActivePlayerCount(); i++)
+                    {
+                        if (TShock.Players[i].Name != player.Name)
                         {
-                            ply.Disconnect(Config.Settings.panicModeKickMessage);
+                            TShock.Players[i].Disconnect(Config.Settings.panicModeKickMessage);
+                            return;
                         }
                     }
                     player.SendSuccessMessage(tag + "All players has been kicked.");
@@ -106,11 +112,17 @@ namespace TShock_Gatekeeper
 
                 case "kickUsers":
                 case "ku":
-                    foreach (TSPlayer ply in TShock.Players)
+                    if (TShock.Utils.GetActivePlayerCount() < 1)
                     {
-                        if (!ply.Group.HasPermission(Config.Settings.staffGroupsPermission))
+                        player.SendErrorMessage(tag + "There's no other players beside you.");
+                        return;
+                    };
+                    for (int i = 0; i < TShock.Utils.GetActivePlayerCount(); i++)
+                    {
+                        if (!TShock.Players[i].Group.HasPermission(Config.Settings.staffGroupsPermission))
                         {
-                            ply.Disconnect(Config.Settings.panicModeKickMessage);
+                            TShock.Players[i].Disconnect(Config.Settings.panicModeKickMessage);
+                            return;
                         }
                     }
                     player.SendSuccessMessage(tag + "All players except you and your staffs has been kicked.");
@@ -118,29 +130,37 @@ namespace TShock_Gatekeeper
 
                 case "kickOrdinary":
                 case "ko":
-                    foreach (TSPlayer ply in TShock.Players)
+                    if (TShock.Utils.GetActivePlayerCount() < 1)
                     {
-                        if (!Config.Settings.allowedUsersIds.Contains(ply.Account.ID) &&
-                            !ply.Group.HasPermission(Config.Settings.staffGroupsPermission) &&
-                            !ply.Group.HasPermission(Config.Settings.allowedGroupsPermission)
-                            )
+                        player.SendErrorMessage(tag + "There's no other players beside you.");
+                        return;
+                    };
+                    for (int i = 0; i < TShock.Utils.GetActivePlayerCount(); i++)
+                    {
+                        if (!Config.Settings.allowedUsersIds.Contains(TShock.Players[i].Account.ID) &&
+                            (!TShock.Players[i].Group.HasPermission(Config.Settings.staffGroupsPermission) ||
+                            !TShock.Players[i].Group.HasPermission(Config.Settings.allowedGroupsPermission)))
                         {
-                            ply.Disconnect(Config.Settings.panicModeKickMessage);
+                            TShock.Players[i].Disconnect(Config.Settings.panicModeKickMessage);
+                            return;
                         }
-
                     }
                     player.SendSuccessMessage(tag + "All players except you, your staffs, allowed players, and allowed groups has been kicked.");
                     return;
 
                 case "kickUnregistered":
                 case "kun":
-                    foreach (TSPlayer ply in TShock.Players)
+                    if(TShock.Utils.GetActivePlayerCount() < 1)
                     {
-                        if (TShock.UserAccounts.GetUserAccountByName(ply.Name) == null ||
-                            TShock.UserAccounts.GetUserAccountsByName(ply.Name).Count < 1
-                            )
+                        player.SendErrorMessage(tag + "There's no other players beside you.");
+                        return;
+                    };
+                    for (int i = 0; i < TShock.Utils.GetActivePlayerCount(); i ++)
+                    {
+                        if (TShock.UserAccounts.GetUserAccountByName(TShock.Players[i].Name) == null || 
+                            TShock.UserAccounts.GetUserAccountsByName(TShock.Players[i].Name).Count < 1)
                         {
-                            player.Disconnect(Config.Settings.panicModeKickMessage);
+                            TShock.Players[i].Disconnect(Config.Settings.panicModeKickMessage);
                             return;
                         }
                     }
