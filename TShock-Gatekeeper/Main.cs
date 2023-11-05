@@ -137,8 +137,15 @@ namespace TShock_Gatekeeper
                     };
                     for (int i = 0; i < TShock.Utils.GetActivePlayerCount(); i++)
                     {
+                        if (TShock.UserAccounts.GetUserAccountByName(TShock.Players[i].Name) == null ||
+                            TShock.UserAccounts.GetUserAccountsByName(TShock.Players[i].Name).Count < 1)
+                        {
+                            TShock.Players[i].Disconnect(Config.Settings.panicModeKickMessage);
+                            return;
+                        }
+
                         if (!Config.Settings.allowedUsersIds.Contains(TShock.Players[i].Account.ID) &&
-                            (!TShock.Players[i].Group.HasPermission(Config.Settings.staffGroupsPermission) ||
+                            (!TShock.Players[i].Group.HasPermission(Config.Settings.staffGroupsPermission) &&
                             !TShock.Players[i].Group.HasPermission(Config.Settings.allowedGroupsPermission)))
                         {
                             TShock.Players[i].Disconnect(Config.Settings.panicModeKickMessage);
