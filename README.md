@@ -1,5 +1,5 @@
 # Warning!
-This plugin haven't been tested fully. This is a new source code i created because i lost the original one. So i am pretty sure there will be some bugs. If you found any please create an issue for it or you can also help me fix it by doing pull request :)
+This plugin haven't been tested fully. This is a new source code i created in my spare time because i lost the original one. So i am pretty sure there will be some bugs. If you found any please create an issue for it or you can also help me fix it by doing pull request :)
 
 # TShock-Gatekeeper
 TShock gatekeeper, i don't really know what to put here. This is literally a gatekeeper, if you have the "pass" you can enter the server else you'll be kicked by the gatekeeper.
