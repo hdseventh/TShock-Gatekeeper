@@ -1,3 +1,6 @@
+# Warning!
+This plugin haven't been tested fully. This is a new source code i created because i lost the original one. So i am pretty sure there will be some bugs. If you found any please create an issue for it or you can also help me fix it by doing pull request :)
+
 # TShock-Gatekeeper
 TShock gatekeeper, i don't really know what to put here. This is literally a gatekeeper, if you have the "pass" you can enter the server else you'll be kicked by the gatekeeper.
 This is just a glorified whitelist for my terraria server "KodokMan" a year ago (now it is closed). Pretty useful when your server are under attack by persistent cheaters at 3 AM in the morning. This will hold them from joining your server while you sleep and let your 8 AM self handle them.
